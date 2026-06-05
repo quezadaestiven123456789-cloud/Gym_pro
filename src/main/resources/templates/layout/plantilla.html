@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Clientes</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <h1 th:text="#{plantilla.titulo}">Control Clientes</h1>
+        <hr/>
+    </header>
+
+    <footer th:fragment="footer">
+        <hr/>
+        <p>
+            [[#{plantilla.piePagina}]] -
+            <a href="https://www.ucacue.edu.ec" target="_blank">https://www.ucacue.edu.ec</a>
+        </p>
+    </footer>
+</body>
+</html>

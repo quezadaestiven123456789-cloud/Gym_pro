@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Persona</title>
+</head>
+<body>
+    <header th:replace="layout/plantilla :: header"></header>
+
+    <h1>[[#{persona.formulario}]]</h1>
+
+    <form th:action="@{/guardar}" th:object="${persona}" method="post">
+        <input type="hidden" th:field="*{idPersona}"/>
+
+        <div>
+            <label>[[#{persona.nombre}]]:</label>
+            <input type="text" th:field="*{nombre}"/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:red;"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.apellido}]]:</label>
+            <input type="text" th:field="*{apellido}"/>
+            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" style="color:red;"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.email}]]:</label>
+            <input type="email" th:field="*{email}"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red;"></span>
+        </div>
+
+        <div>
+            <label>[[#{persona.telefono}]]:</label>
+            <input type="text" th:field="*{telefono}"/>
+            <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" style="color:red;"></span>
+        </div>
+
+        <br/>
+        <button type="submit">[[#{accion.guardar}]]</button>
+        <a th:href="@{/}"><button type="button">[[#{accion.regresar}]]</button></a>
+    </form>
+
+    <footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>
