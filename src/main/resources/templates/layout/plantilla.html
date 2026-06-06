@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Control Clientes</title>
 </head>
+
 <body>
     <header th:fragment="header">
         <h1 th:text="#{plantilla.titulo}">Control Clientes</h1>
-        <hr/>
+        <hr />
     </header>
 
     <footer th:fragment="footer">
-        <hr/>
         <p>
-            [[#{plantilla.piePagina}]] -
+            <hr />
+        <div>
+            <a th:href="@{/(lang=es)}">Es</a>
+            <a th:href="@{/(lang=en)}">En</a>
+            <span th:text="#{plantilla.piePagina}">nose q poner</span>" -
             <a href="https://www.ucacue.edu.ec" target="_blank">https://www.ucacue.edu.ec</a>
+        </div>
         </p>
     </footer>
 </body>
+
 </html>
