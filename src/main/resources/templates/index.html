@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Control de Personas</title>
@@ -7,42 +8,31 @@
 <body>
     <header th:replace="layout/plantilla :: header"></header>
 
-    <h1>Control de Personas</h1>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}">[[#{persona.crear}]]</a>
 
-    <a th:href="@{/agregar}">
-        <button>[[#{persona.crear}]]</button>
-    </a>
-
-    <br/><br/>
-
-    <table border="1">
-        <thead>
+    <div th:if="${personas != null and !personas.empty}">
+        <table border="1">
             <tr>
-                <th>ID</th>
-                <th>[[#{persona.nombre}]]</th>
-                <th>[[#{persona.apellido}]]</th>
-                <th>[[#{persona.email}]]</th>
-                <th>[[#{persona.telefono}]]</th>
-                <th>[[#{accion.editar}]]</th>
-                <th>[[#{accion.eliminar}]]</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.editar}]]</th>
+                <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.eliminar}]]</th>
             </tr>
-        </thead>
-        <tbody>
             <tr th:each="persona : ${personas}">
-                <td th:text="${persona.idPersona}">1</td>
-                <td th:text="${persona.nombre}">Nombre</td>
-                <td th:text="${persona.apellido}">Apellido</td>
-                <td th:text="${persona.email}">email@example.com</td>
-                <td th:text="${persona.telefono}">123456789</td>
-                <td>
-                    <a th:href="@{/editar/{id}(id=${persona.idPersona})}">[[#{accion.editar}]]</a>
-                </td>
-                <td>
-                    <a th:href="@{/eliminar/{id}(id=${persona.idPersona})}">[[#{accion.eliminar}]]</a>
-                </td>
+                <td th:text="${persona.nombre}"></td>
+                <td th:text="${persona.apellido}"></td>
+                <td th:text="${persona.email}"></td>
+                <td th:text="${persona.telefono}"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/{idPersona}(idPersona=${persona.idPersona})}">[[#{accion.editar}]]</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar/{idPersona}(idPersona=${persona.idPersona})}">[[#{accion.eliminar}]]</a></td>
             </tr>
-        </tbody>
-    </table>
+        </table>
+    </div>
+    <div th:if="${personas == null or personas.empty}">
+        [[#{persona.lista-vacia}]]
+    </div>
 
     <footer th:replace="layout/plantilla :: footer"></footer>
 </body>

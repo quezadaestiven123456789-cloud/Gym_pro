@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Plantilla</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <h1 th:text="#{plantilla.titulo}">Titulo</h1>
+        </header>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Control Clientes</title>
-</head>
+        <footer th:fragment="footer">
+            <div>
+                <form method="POST" th:action="@{/logout}">
+                    <b>User:</b> <span sec:authentication="name">Usuario que hizo login</span> |
+                    <b>Roles:</b> <span sec:authentication="principal.authorities">Roles</span> |
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form>
+            </div>
+        </footer>
 
-<body>
-    <header th:fragment="header">
-        <h1 th:text="#{plantilla.titulo}">Control Clientes</h1>
-        <hr />
-    </header>
-
-    <footer th:fragment="footer">
-        <p>
-            <hr />
-        <div>
-            <a th:href="@{/(lang=es)}">Es</a>
-            <a th:href="@{/(lang=en)}">En</a>
-            <span th:text="#{plantilla.piePagina}">nose q poner</span>" -
-            <a href="https://www.ucacue.edu.ec" target="_blank">https://www.ucacue.edu.ec</a>
-        </div>
-        </p>
-    </footer>
-</body>
-
+    </body>
 </html>
